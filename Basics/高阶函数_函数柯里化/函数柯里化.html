@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>component</title>
+</head>
+
+<body>
+    <!-- 一个容器 -->
+    <div id="test"></div>
+    <!-- react 核心库 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- babel, 将jsx转换为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <script type="text/javascript" src="../js/prop-types.js"></script>
+    <!--  -->
+    <script type="text/babel">
+        
+        class Demo extends React.Component {
+            state ={
+                username: '', 
+                password: ''
+            }
+            
+            saveFormData = (dataType, value) => {
+                
+                this.setState({[dataType]:value})
+                
+            }
+            handleSubmit = (event) => {
+                event.preventDefault();
+                const {username, password} = this.state
+                alert(username)
+            }
+
+            render() { 
+                return ( 
+                    <form action="http://www.baidu.com" onSubmit ={this.handleSubmit}>
+                        Username: <input onChange={(event)=>{this.saveFormData('username',event.target.value)}} type="text" name="username"/>
+                        Password: <input onChange={(event)=>{this.saveFormData('password',event.target.value)}} type="password" name="password"/>
+                        <button>login</button>
+                    </form>
+                );
+            }
+        }
+         
+        ReactDOM.render(<Demo/>,document.getElementById('test'))
+    </script>
+
+</body>
+
+</html>
